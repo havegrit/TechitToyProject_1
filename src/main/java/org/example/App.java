@@ -34,6 +34,14 @@ public class App {
                 for (Quotes quote : quotesList) {
                     System.out.printf("%d / %s / %s\n", quote.getId(), quote.getWriter(), quote.getContent());
                 }
+            } else if (input.startsWith("삭제?id=")) {
+                int id = Integer.parseInt(input.substring(6));
+                for(Quotes quote:quotesList) {
+                    if(quote.getId() == id) {
+                        System.out.println(quote.getId() + "번 명언이 삭제되었습니다.");
+                        quotesList.remove(quote);
+                    }
+                }
             }
         }
     }
