@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,11 +37,16 @@ public class App {
                 }
             } else if (input.startsWith("삭제?id=")) {
                 int id = Integer.parseInt(input.substring(6));
-                for(Quotes quote:quotesList) {
-                    if(quote.getId() == id) {
-                        System.out.println(quote.getId() + "번 명언이 삭제되었습니다.");
-                        quotesList.remove(quote);
+                boolean flag = true;
+                for(Iterator<Quotes> quote = quotesList.iterator(); quote.hasNext();) {
+                    if(quote.next().getId() == id) {
+                        flag = false;
+                        System.out.println(id + "번 명언이 삭제되었습니다.");
+                        quote.remove();
                     }
+                }
+                if(flag) {
+                    System.out.println(id + "번 명언은 존재하지 않습니다.");
                 }
             }
         }
