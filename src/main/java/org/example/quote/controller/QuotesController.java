@@ -37,12 +37,16 @@ public class QuotesController {
 
     public void delete(Rq rq) {
         int id = rq.getIntParam("id", -1);
+
+        if(id == -1) {
+            System.out.println("id(정수)를 입력해주세요.");
+        }
         boolean flag = true;
-        for(Iterator<Quotes> quote = quotesList.iterator(); quote.hasNext();) {
-            if(quote.next().getId() == id) {
+        quotesList.remove(findById(id));
+        for (Quotes quote:quotesList) {
+            if (quote.getId() == id) {
                 flag = false;
-                System.out.println(id + "번 명언이 삭제되었습니다.");
-                quote.remove();
+                break;
             }
         }
         if(flag) {
@@ -73,5 +77,13 @@ public class QuotesController {
 
     public void saveData(List<Quotes> quotesList) {
 
+    }
+
+    private Quotes findById(int id) {
+        for(Quotes quote:quotesList) {
+            if(quote.getId() == id) {
+                return quote;
+            }
+        }
     }
 }
