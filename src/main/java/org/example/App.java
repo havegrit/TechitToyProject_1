@@ -48,7 +48,27 @@ public class App {
                 if(flag) {
                     System.out.println(id + "번 명언은 존재하지 않습니다.");
                 }
+            } else if (input.startsWith("수정?id=")) {
+                int id = Integer.parseInt(input.substring(6));
+                boolean flag = true;
+                for (Quotes quote : quotesList) {
+                    if (quote.getId() == id) {
+                        flag = false;
+                        System.out.println("명언(기존): " + quote.getContent());
+                        System.out.printf("명언: ");
+                        String content = sc.nextLine();
+                        quote.setContent(content);
+                        System.out.println("작가(기존): " + quote.getWriter());
+                        System.out.printf("작가: ");
+                        String writer = sc.nextLine();
+                        quote.setWriter(writer);
+                    }
+                }
+                if (flag) {
+                    System.out.println(id + "번 명언은 존재하지 않습니다.");
+                }
             }
+
         }
     }
 }
@@ -76,5 +96,12 @@ class Quotes {
 
     public void setId(int id) {
         this.id = id;
+    }
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setWriter(String writer) {
+        this.writer = writer;
     }
 }
