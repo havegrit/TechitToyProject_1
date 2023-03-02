@@ -3,6 +3,8 @@ package org.example.quote.controller;
 import org.example.Container;
 import org.example.Rq;
 import org.example.quote.entity.Quotes;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -40,18 +42,22 @@ public class QuotesController {
 
         if(id == -1) {
             System.out.println("id(정수)를 입력해주세요.");
+            return;
         }
         boolean flag = true;
-        quotesList.remove(findById(id));
         for (Quotes quote:quotesList) {
             if (quote.getId() == id) {
                 flag = false;
                 break;
             }
         }
-        if(flag) {
+        Quotes quote = findById(id);
+        quotesList.remove(quote);
+        if(quote == null) {
             System.out.println(id + "번 명언은 존재하지 않습니다.");
+            return;
         }
+        System.out.printf("%d번 명언이 삭제되었습니다.\n", id);
     }
 
     public void edit(Rq rq) {
@@ -85,5 +91,6 @@ public class QuotesController {
                 return quote;
             }
         }
+        return null;
     }
 }
