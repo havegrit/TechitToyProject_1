@@ -1,15 +1,15 @@
 package org.example;
 
 import org.example.quote.controller.QuotesController;
-import org.example.quote.entity.Quotes;
 import org.example.system.controller.SystemController;
-import java.util.List;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class App {
     public void run() {
-
         System.out.println("== 명언 앱 ==");
-
         SystemController systemController = new SystemController();
         QuotesController quotesController = new QuotesController();
 
@@ -23,15 +23,25 @@ public class App {
                 quotesController.write();
             } else if (input.equals("목록")) {
                 quotesController.list();
-            } else if (input.startsWith("삭제?id=")) {
+            } else if (input.startsWith("삭제")) {
+                String[] inputBits = input.split("\\?", 2);
+                String actionCode = inputBits[0];
+                Map<String, String> params = new HashMap<>();
+                String[] paramBits = inputBits[1].split("&");
+                for(String paramStr:paramBits) {
+                    String[] paramStrBits = paramStr.split("=", 2);
+                    String key = paramStrBits[0];
+                    String value = paramStrBits[1];
+                    params.put(key, value);
+                }
+
+                System.out.printf("actionCode = %s\n",actionCode);
+                System.out.printf("params = %s\n", params);
+
                 quotesController.delete(input);
-            } else if (input.startsWith("수정?id=")) {
+            } else if (input.startsWith("수정")) {
                 quotesController.edit(input);
             }
         }
-    }
-
-    public void saveData(List<Quotes> quotesList) {
-
     }
 }

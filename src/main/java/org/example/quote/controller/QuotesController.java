@@ -2,7 +2,6 @@ package org.example.quote.controller;
 
 import org.example.Container;
 import org.example.quote.entity.Quotes;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -69,5 +68,9 @@ public class QuotesController {
         if (flag) {
             System.out.println(id + "번 명언은 존재하지 않습니다.");
         }
+    }
+
+    public void saveData(List<Quotes> quotesList) {
+
     }
 }
