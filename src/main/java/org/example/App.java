@@ -21,7 +21,7 @@ public class App {
                 String content = sc.nextLine();
                 System.out.printf("작가: ");
                 String writer = sc.nextLine();
-                System.out.println(cnt + "번 명언이 등록되었습니다.");
+                System.out.println(cnt++ + "번 명언이 등록되었습니다.");
             }
         }
     }
