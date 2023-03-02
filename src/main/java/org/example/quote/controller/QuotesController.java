@@ -44,15 +44,10 @@ public class QuotesController {
             System.out.println("id(정수)를 입력해주세요.");
             return;
         }
-        boolean flag = true;
-        for (Quotes quote:quotesList) {
-            if (quote.getId() == id) {
-                flag = false;
-                break;
-            }
-        }
+
         Quotes quote = findById(id);
         quotesList.remove(quote);
+
         if(quote == null) {
             System.out.println(id + "번 명언은 존재하지 않습니다.");
             return;
@@ -63,22 +58,20 @@ public class QuotesController {
     public void edit(Rq rq) {
         int id = rq.getIntParam("id", -1);
         boolean flag = true;
-        for (Quotes quote : quotesList) {
-            if (quote.getId() == id) {
-                flag = false;
-                System.out.println("명언(기존): " + quote.getContent());
-                System.out.print("명언: ");
-                String content = Container.getScanner().nextLine();
-                quote.setContent(content);
-                System.out.println("작가(기존): " + quote.getWriter());
-                System.out.print("작가: ");
-                String writer = Container.getScanner().nextLine();
-                quote.setWriter(writer);
-            }
-        }
-        if (flag) {
+
+        Quotes quote = findById(id);
+        if(quote == null) {
             System.out.println(id + "번 명언은 존재하지 않습니다.");
+            return;
         }
+        System.out.println("명언(기존): " + quote.getContent());
+        System.out.print("명언: ");
+        String content = Container.getScanner().nextLine();
+        quote.setContent(content);
+        System.out.println("작가(기존): " + quote.getWriter());
+        System.out.print("작가: ");
+        String writer = Container.getScanner().nextLine();
+        quote.setWriter(writer);
     }
 
     public void saveData(List<Quotes> quotesList) {
