@@ -1,6 +1,7 @@
 package org.example.quote.controller;
 
 import org.example.Container;
+import org.example.Rq;
 import org.example.quote.entity.Quotes;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -34,8 +35,8 @@ public class QuotesController {
         }
     }
 
-    public void delete(String input) {
-        int id = Integer.parseInt(input.substring(6));
+    public void delete(Rq rq) {
+        int id = rq.getIntParam("id", -1);
         boolean flag = true;
         for(Iterator<Quotes> quote = quotesList.iterator(); quote.hasNext();) {
             if(quote.next().getId() == id) {
@@ -49,8 +50,8 @@ public class QuotesController {
         }
     }
 
-    public void edit(String input) {
-        int id = Integer.parseInt(input.substring(6));
+    public void edit(Rq rq) {
+        int id = rq.getIntParam("id", -1);
         boolean flag = true;
         for (Quotes quote : quotesList) {
             if (quote.getId() == id) {
