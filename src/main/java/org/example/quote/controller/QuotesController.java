@@ -24,7 +24,12 @@ public class QuotesController {
     }
 
     public void list() {
-        quoteService.list();
+        List<Quote> quoteList = quoteService.findAll();
+        System.out.println("번호 / 작가 / 명언");
+        System.out.println("----------------------");
+        for (Quote quote : quoteList) {
+            System.out.printf("%d / %s / %s\n", quote.getId(), quote.getWriter(), quote.getContent());
+        }
     }
 
     public void delete(Rq rq) {
