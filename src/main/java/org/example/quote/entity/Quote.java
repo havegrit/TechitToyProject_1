@@ -1,16 +1,17 @@
 package org.example.quote.entity;
 
-public class Quotes {
-    private int id;
+public class Quote {
+    private long id;
     private String content;
     private String writer;
 
-    public Quotes(String content, String writer) {
+    public Quote(long id, String content, String writer) {
+        this.id = id;
         this.content = content;
         this.writer = writer;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
     public String getContent() {
